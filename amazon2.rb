@@ -58,7 +58,6 @@ hemingway = Author.new("Ernest Hemingway")
 fitzgerald = Author.new("F. Scott Fitzgerald")
 conrad = Author.new("Josef Conrad")
 steinbeck = Author.new("John Steinbeck")
-dick = Author.new("Philip K. Dick")
 lauren_oliver = Author.new("Lauren Oliver")
 emily_bronte = Author.new("Emily Bronte")
 william_shakespeare = Author.new("William Shakespeare")
@@ -150,8 +149,14 @@ while runner == 0
 
   puts "What type of book would you like to read?"
 
+  @category_list =[]
+
   Category.all.each do |category, index|
-    puts "#{category.name}"
+    @category_list << category.name
+  end
+
+  @category_list.each_with_index do |sample, index|
+    puts "[#{index + 1}] #{sample}"
   end
 
   puts "[4] Exit"
@@ -164,48 +169,62 @@ while runner == 0
     puts "We have selected the following three romance"
     puts "books for you to try:"
 
-    romance_list.sample(3).each do |i|
-      @sample << i
+    Book.all.each do |book|
+      case book.category.name
+      when "Romance"
+        
+        puts "#{book.name} by #{book.author.name}"
+      else
+
+      end
+
     end
 
-    random_sample
-    puts "Your library consists of #{@jon}"
 
 
-  elsif answer == 2
-    system("clear")
-    puts "We have selected the following three thriller"
-    puts "books for you to try:"
+    # romance_list.sample(3).each do |i|
+    #   @sample << i
+    # end
+    #
+    #
+    #
+    # random_sample
+    # puts "Your library consists of #{@jon}"
 
-    thriller_list.sample(3).each do |i|
-      @sample << i
-    end
-
-    random_sample
-
-    puts "Your library consists of #{@jon}"
-
-  elsif answer == 3
-    system("clear")
-    puts "We have selected the following three classics"
-    puts "books for you to try:"
-
-    classics_list.sample(3).each do |i|
-      @sample << i
-    end
-
-    random_sample
-
-    puts "Your library consists of #{@jon}"
-
-  elsif answer == 4
-    File.open("test.txt", "w+") do |f|
-      @jon.each { |element| f.puts(element) }
-    end
-    abort
+  #
+  # elsif answer == 2
+  #   system("clear")
+  #   puts "We have selected the following three thriller"
+  #   puts "books for you to try:"
+  #
+  #   thriller_list.sample(3).each do |i|
+  #     @sample << i
+  #   end
+  #
+  #   random_sample
+  #
+  #   puts "Your library consists of #{@jon}"
+  #
+  # elsif answer == 3
+  #   system("clear")
+  #   puts "We have selected the following three classics"
+  #   puts "books for you to try:"
+  #
+  #   classics_list.sample(3).each do |i|
+  #     @sample << i
+  #   end
+  #
+  #   random_sample
+  #
+  #   puts "Your library consists of #{@jon}"
+  #
+  # elsif answer == 4
+  #   File.open("test.txt", "w+") do |f|
+  #     @jon.each { |element| f.puts(element) }
+  #   end
+  #   abort
   else
     system("clear")
     puts "Invalid choice. Please select a number between 1-3"
   end
-
 end
